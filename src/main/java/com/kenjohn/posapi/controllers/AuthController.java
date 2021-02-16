@@ -1,10 +1,12 @@
 package com.kenjohn.posapi.controllers;
 
+import com.kenjohn.posapi.exceptions.BadRequestException;
 import com.kenjohn.posapi.jwtConfigs.JwtTokenUtil;
 import com.kenjohn.posapi.jwtConfigs.JwtUserDetailsService;
 import com.kenjohn.posapi.models.JwtRequest;
 import com.kenjohn.posapi.models.JwtResponse;
 import com.kenjohn.posapi.models.UserDTO;
+import com.kenjohn.posapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,6 +34,9 @@ public class AuthController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @RequestMapping(value = "/api/auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -47,6 +52,8 @@ public class AuthController {
 
     @RequestMapping(value = "/api/users", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+        if(userRepository.existsByUsername(user.getUsername())) throw new BadRequestException("Username already exists.");
+
         return ResponseEntity.ok(userDetailsService.save(user));
     }
 
