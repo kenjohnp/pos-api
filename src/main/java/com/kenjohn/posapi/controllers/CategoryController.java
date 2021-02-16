@@ -5,6 +5,7 @@ import com.kenjohn.posapi.models.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category addCategory(@RequestBody Category category){
+    public Category addCategory(@Valid @RequestBody Category category){
         categoryRepository.save(category);
         return category;
     }

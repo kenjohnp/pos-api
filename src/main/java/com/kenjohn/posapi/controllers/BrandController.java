@@ -44,7 +44,7 @@ public class BrandController {
     }
 
     @PutMapping("/{id}")
-    public Brand updateBrand(@PathVariable Integer id, @RequestBody Brand brand){
+    public Brand updateBrand(@PathVariable Integer id,@Valid @RequestBody Brand brand){
         brandRepository.findById(id).orElseThrow(notFoundException);
 
         brand.setId(id);

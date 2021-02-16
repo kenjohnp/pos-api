@@ -5,6 +5,7 @@ import com.kenjohn.posapi.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,13 +26,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product product){
+    public Product addProduct(@Valid @RequestBody Product product){
         productRepository.save(product);
         return product;
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Integer id, @RequestBody Product product){
+    public Product updateProduct(@PathVariable Integer id, @Valid @RequestBody Product product){
         product.setId(id);
         productRepository.save(product);
         return product;
