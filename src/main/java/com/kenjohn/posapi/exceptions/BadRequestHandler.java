@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-
 @ControllerAdvice
 public class BadRequestHandler {
     @ResponseBody

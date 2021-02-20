@@ -13,7 +13,6 @@ public class Brand {
     private Integer id;
 
     @NotNull(message="Brand name is required.")
-    @NotBlank(message="Brand name must not be blank.")
     @Size(max=50, message = "Brand name must be less than 50 characters.")
     private String brandName;
 
