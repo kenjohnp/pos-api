@@ -2,17 +2,14 @@ package com.kenjohn.posapi.controllers;
 
 import com.kenjohn.posapi.exceptions.BadRequestException;
 import com.kenjohn.posapi.exceptions.ResourceNotFoundException;
-import com.kenjohn.posapi.exceptions.ValidationHandler;
 import com.kenjohn.posapi.models.Brand;
-import com.kenjohn.posapi.repositories.BrandRepository;
-import javassist.tools.web.BadHttpRequest;
+import com.kenjohn.posapi.datasource.BrandRepository;
+import com.kenjohn.posapi.services.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.Valid;
-import javax.validation.ValidationException;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -23,23 +20,27 @@ public class BrandController {
     @Autowired
     private BrandRepository brandRepository;
 
+    @Autowired
+    private BrandService brandService;
+
     private Supplier<ResourceNotFoundException> notFoundException = () -> new ResourceNotFoundException("Brand not found.");
 
     @GetMapping
     public List<Brand> getBrands() {
-        return brandRepository.findAll();
+        return brandService.getBrands();
     }
 
     @GetMapping("/{id}")
     public Brand getBrand(@PathVariable Integer id){
-        return brandRepository.findById(id).orElseThrow(notFoundException);
+//        return brandRepository.findById(id).orElseThrow(notFoundException);
+        return brandService.getBrand(id);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Brand addBrand (@Valid @RequestBody Brand brand) {
-        if(brandRepository.existsByBrandName(brand.getBrandName())) throw new BadRequestException("Brand name already exists.");
 
-        brandRepository.save(brand);
+        brandService.addBrand(brand);
         return brand;
     }
 

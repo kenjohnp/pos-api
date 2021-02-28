@@ -16,6 +16,11 @@ public class Brand {
     @Size(max=50, message = "Brand name must be less than 50 characters.")
     private String brandName;
 
+    public Brand(Integer id, @NotNull(message = "Brand name is required.") @Size(max = 50, message = "Brand name must be less than 50 characters.") String brandName) {
+        this.id = id;
+        this.brandName = brandName;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -33,4 +38,8 @@ public class Brand {
         this.brandName = brandName;
     }
 
+    @Override
+    public String toString() {
+        return "brandName: " + brandName;
+    }
 }

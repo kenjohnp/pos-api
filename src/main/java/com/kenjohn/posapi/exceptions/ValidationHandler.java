@@ -25,11 +25,9 @@ public class ValidationHandler {
 
         List<FieldError> fieldErrors = result.getFieldErrors();
 
-//        String errorMessage = fieldErrors.get(0).getDefaultMessage();
         ApiException apiException = new ApiException(fieldErrors.get(0).getDefaultMessage(), HttpStatus.BAD_REQUEST, ZonedDateTime.now(ZoneId.of("Z")));
 
 
         return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
-//        return ResponseEntity.badRequest().body(errorMessage);
     }
 }

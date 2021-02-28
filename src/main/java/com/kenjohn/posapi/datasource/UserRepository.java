@@ -1,4 +1,4 @@
-package com.kenjohn.posapi.repositories;
+package com.kenjohn.posapi.datasource;
 
 import com.kenjohn.posapi.models.DAOUser;
 import org.springframework.data.repository.CrudRepository;

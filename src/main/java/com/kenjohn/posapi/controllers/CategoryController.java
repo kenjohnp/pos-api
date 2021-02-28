@@ -1,6 +1,6 @@
 package com.kenjohn.posapi.controllers;
 
-import com.kenjohn.posapi.repositories.CategoryRepository;
+import com.kenjohn.posapi.datasource.CategoryRepository;
 import com.kenjohn.posapi.models.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

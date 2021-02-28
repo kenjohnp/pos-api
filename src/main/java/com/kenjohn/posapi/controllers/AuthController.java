@@ -6,7 +6,7 @@ import com.kenjohn.posapi.jwtConfigs.JwtUserDetailsService;
 import com.kenjohn.posapi.models.JwtRequest;
 import com.kenjohn.posapi.models.JwtResponse;
 import com.kenjohn.posapi.models.UserDTO;
-import com.kenjohn.posapi.repositories.UserRepository;
+import com.kenjohn.posapi.datasource.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
